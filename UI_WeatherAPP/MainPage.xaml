@@ -1,0 +1,171 @@
+﻿<Page
+    x:Class="UI_WeatherAPP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UI_WeatherAPP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+     Width="500"
+    Height="550"
+    
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/img/forest_mountains_sunset_cool_weather_minimalism.jpg"/>
+        </Grid.Background>
+        <FlipView>
+            <FlipViewItem x:Name="FlipViewAverages" Background="White">
+                <Grid Margin="24">
+                    <GridView x:Name="grdview">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid>
+                                        <Border Background="LightGray" Height="120" Width="300" Opacity="2"/>
+                                        <StackPanel>
+                                            <TextBlock Text="Average Temperature"
+                                                       FontSize="24" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center">
+                                            </TextBlock>
+                                            <TextBlock 
+                                                x:Name="TbAverageTemp" 
+                                                FontSize="24" Foreground="LimeGreen" 
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center">
+                                                <Run Text="{Binding AvgTemperature}"/>
+                                                <Run Text="°C"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="0,12,0,0">
+                                        <Border Background="LightGray" Height="120" Width="300"/>
+                                        <StackPanel>
+                                            <TextBlock Text="Average Humidity" 
+                                                       FontSize="24" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center"/>
+                                            <TextBlock  
+                                                       FontSize="24" 
+                                                       Foreground="LimeGreen" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center">
+                                                <Run Text="{Binding AvgHumidity}"/>
+                                                <Run Text="%"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="0,12,0,0">
+                                        <Border Background="LightGray" Height="120" Width="300"/>
+                                        <StackPanel>
+                                            <TextBlock Text="Average Pressure" 
+                                                       FontSize="24" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center"/>
+                                            <TextBlock 
+                                                       FontSize="24" 
+                                                       Foreground="LimeGreen" 
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center">
+                                                <Run Text="{Binding AvgPressure}"/>
+                                                <Run Text="hPa"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid MaximumRowsOrColumns="2"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+
+                    </GridView>
+                </Grid>
+            </FlipViewItem>
+            <FlipViewItem>
+                <Grid Margin="24">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="75"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Starting from:" Grid.Column="0" VerticalAlignment="Center"/>
+                            <CalendarDatePicker x:Name="DpStarting" Grid.Column="1"/>
+                            <Button x:Name="TglStartDate" Grid.Column="2" Content="Empty" Click="TglStartDate_Click"/>
+
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="75"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Until:" Grid.Column="0" VerticalAlignment="Center"/>
+                            <CalendarDatePicker x:Name="DpUntil" Grid.Column="1"/>
+                            <Button x:Name="TglEndDate" Grid.Column="2" Content="Empty" Click="TglEndDate_Click"/>
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="75"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Temperature Min:" Grid.Column="0" VerticalAlignment="Center"/>
+                            <Slider x:Name="SliderTempMin" Minimum="-30" Maximum="40" StepFrequency="1" Grid.Column="1"/>
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="130"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Temperature Max:" Grid.Column="0" VerticalAlignment="Center"/>
+                            <Slider x:Name="SliderTempMax" Minimum="-30" Maximum="40" StepFrequency="1" Grid.Column="1"/>
+                        </Grid>
+                        <Grid Margin="0,10,0,0">
+                            <Button x:Name="BtnSearch" Click="BtnSearch_Click">Search</Button>
+                        </Grid>
+                    </StackPanel>
+                    <Grid Margin="0,10,0,0" Grid.Row="1">
+                        <ListView x:Name="GrdWeather" FontSize="24">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock>
+                                            <Run Text="Date:"/>
+                                            <Run Text="{Binding Date}" FontWeight="SemiBold"/>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run Text="Temperature:"/>
+                                            <Run Text="{Binding Temperature}"/>
+                                            <Run Text="°C"/>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run Text="Humidity:"/>
+                                            <Run Text="{Binding Humidity}"/>
+                                            <Run Text="%"/>
+                                        </TextBlock>
+                                        <TextBlock>
+                                            <Run Text="Air pressure:"/>
+                                            <Run Text="{Binding Pressure}"/>
+                                            <Run Text="hPa"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Grid>
+            </FlipViewItem>
+        </FlipView>
+        
+    </Grid>
+</Page>
