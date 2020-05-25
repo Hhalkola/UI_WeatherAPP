@@ -18,13 +18,24 @@ namespace UI_WeatherAPP
             GetTop5();
             GetDataForAverages();
 
-            //TODO
-            //Setteri muuttaa päivämäärän suomimuotoon + aika 24h
-            //Piilota connectionstring
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
+            if (DpStarting.Date > DpUntil.Date)
+            {
+                MessageDialog ms = new MessageDialog("Starting date can't be bigger than ending date");
+                _ = ms.ShowAsync();
+            }
+            if (SliderTempMin.Value > SliderTempMax.Value)
+            {
+                MessageDialog ms = new MessageDialog("Minimum temperature can't be bigger than maximum value");
+                _ = ms.ShowAsync();
+            }
+
+
+
+
             RefreshGrid();
         }
 

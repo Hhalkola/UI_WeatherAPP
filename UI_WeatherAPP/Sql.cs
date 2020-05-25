@@ -2,13 +2,14 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-
+using System.IO;
+using Windows.UI.Popups;
 
 namespace UI_WeatherAPP
 {
     class Sql
     {
-        private const string connstring = "";
+        static private string connstring = ReadTxt();
         static private SqlConnection conn;
         static private SqlCommand query = null;
 
@@ -40,9 +41,10 @@ namespace UI_WeatherAPP
                     conn.Close();
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Debug.Write(ex.Message);
+                MessageDialog ms = new MessageDialog(e.Message);
+                _ = ms.ShowAsync();
             }
             return dt;
         }
@@ -66,13 +68,13 @@ namespace UI_WeatherAPP
             //Select starting date only
             else if (date1.Length > 0 && date2.Length == 0)
             {
-                sql += string.Format(" WHERE date => '{0}'", date1);
+                sql += string.Format(" WHERE date >= '{0}'", date1);
                 check = false;
             }
             //Select ending date only
             else if (date2.Length > 0)
             {
-                sql += string.Format(" WHERE date <= '{0}'", date2);
+                sql += string.Format(" WHERE date =< '{0}'", date2);
                 check = false;
             }
             //Check do we need WHERE or AND next
@@ -98,6 +100,24 @@ namespace UI_WeatherAPP
             }
             sql += "ORDER BY date DESC";
             return sql;
+        }
+        private static string ReadTxt()
+        {
+            string s = "";
+            try
+            {
+               using (StreamReader sr = new StreamReader("TextFile1.txt"))
+                {
+                    s = sr.ReadToEnd();
+                }
+            }
+            catch (Exception e)
+            {
+
+                MessageDialog ms = new MessageDialog(e.Message);
+                _ = ms.ShowAsync();
+            }
+            return s;
         }
     }
 }
