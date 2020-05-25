@@ -32,10 +32,6 @@ namespace UI_WeatherAPP
                 MessageDialog ms = new MessageDialog("Minimum temperature can't be bigger than maximum value");
                 _ = ms.ShowAsync();
             }
-
-
-
-
             RefreshGrid();
         }
 

@@ -32,7 +32,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="UI_WeatherAPP.App">
       <uap:VisualElements
-        DisplayName="UI_WeatherAPP"
+        DisplayName="WeatherApp"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="UI_WeatherAPP"
