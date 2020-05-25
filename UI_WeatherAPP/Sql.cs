@@ -2,15 +2,21 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-
+using System.IO;
+using Windows.UI.Popups;
 
 namespace UI_WeatherAPP
 {
+    
     class Sql
+      
     {
-        private const string connstring = "";
+        
         static private SqlConnection conn;
         static private SqlCommand query = null;
+        static private string cst = ReadTxt();
+        static private readonly string connstring = cst;
+
 
         private static SqlConnection ConnToDB()
         {
@@ -38,12 +44,15 @@ namespace UI_WeatherAPP
                     SqlDataAdapter da = new SqlDataAdapter(sql, connstring);
                     da.Fill(dt);
                     conn.Close();
+                    da.Dispose();
                 }
             }
             catch (Exception ex)
             {
-                Debug.Write(ex.Message);
+                MessageDialog ms = new MessageDialog(ex.Message);
+                _ = ms.ShowAsync();
             }
+            
             return dt;
         }
 
@@ -66,13 +75,13 @@ namespace UI_WeatherAPP
             //Select starting date only
             else if (date1.Length > 0 && date2.Length == 0)
             {
-                sql += string.Format(" WHERE date => '{0}'", date1);
+                sql += string.Format(" WHERE date >= '{0}'", date1);
                 check = false;
             }
             //Select ending date only
             else if (date2.Length > 0)
             {
-                sql += string.Format(" WHERE date <= '{0}'", date2);
+                sql += string.Format(" WHERE date =< '{0}'", date2);
                 check = false;
             }
             //Check do we need WHERE or AND next
@@ -99,5 +108,24 @@ namespace UI_WeatherAPP
             sql += "ORDER BY date DESC";
             return sql;
         }
+
+        private static string ReadTxt()
+        {
+            
+            try
+            {
+                using (StreamReader sr = new StreamReader("TextFile1.txt"))
+                {
+                    cst = sr.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageDialog ms = new MessageDialog(ex.Message);
+                _ = ms.ShowAsync();
+            }
+            return cst;
+        }
+
     }
 }

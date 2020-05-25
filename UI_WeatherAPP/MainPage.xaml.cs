@@ -20,12 +20,26 @@ namespace UI_WeatherAPP
 
             //TODO
             //Setteri muuttaa päivämäärän suomimuotoon + aika 24h
-            //Piilota connectionstring
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
+            if (DpStarting.Date > DpUntil.Date)
+            {
+                MessageDialog ms = new MessageDialog("Starting date can't be bigger than ending value", "Error");
+                _ = ms.ShowAsync();
+                return;
+            }
+            else if (SliderTempMin.Value > SliderTempMax.Value)
+            {
+                MessageDialog ms = new MessageDialog("Minimum temperature can't be higher than maximum temperature", "Error");
+                _ = ms.ShowAsync();
+                return;
+            }
+            else
+            {
             RefreshGrid();
+            }
         }
 
         private void GetTop5() //Call this on startup to setup search window to show 5 newest 
@@ -110,9 +124,13 @@ namespace UI_WeatherAPP
                 avgpres += Convert.ToDecimal(dt.Rows[index]["pressure"]);
                 index++;
             }
+
+            if (dt.Rows.Count > 0)
+            {
             avgtemp = avgtemp / dt.Rows.Count;
             avghum = avghum / dt.Rows.Count;
             avgpres = avgpres / dt.Rows.Count;
+            }
 
             ObservableCollection<Averageweather> obj = new ObservableCollection<Averageweather>();
             var col = new Averageweather()

@@ -6,32 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-     Width="500"
-    Height="550"
     
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+
     <Grid>
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/img/forest_mountains_sunset_cool_weather_minimalism.jpg"/>
         </Grid.Background>
         <FlipView>
-            <FlipViewItem x:Name="FlipViewAverages" Background="White">
-                <Grid Margin="24">
+            <FlipViewItem x:Name="FlipViewAverages">
+                <Grid Margin="24" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <GridView x:Name="grdview">
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel>
+                                <StackPanel> 
                                     <Grid>
-                                        <Border Background="LightGray" Height="120" Width="300" Opacity="2"/>
-                                        <StackPanel>
-                                            <TextBlock Text="Average Temperature"
-                                                       FontSize="24" 
-                                                       HorizontalAlignment="Center" 
+                                        <Border Background="LightGray" Height="120" Width="300" Opacity="0.3"/>
+                                        <StackPanel HorizontalAlignment="Center" 
                                                        VerticalAlignment="Center">
+                                            <TextBlock Text="Average Temperature"
+                                                       FontFamily="Segoe UI Semibold"
+                                                       FontSize="24"  
+                                                       >
                                             </TextBlock>
                                             <TextBlock 
                                                 x:Name="TbAverageTemp" 
-                                                FontSize="24" Foreground="LimeGreen" 
+                                                FontSize="24" 
                                                 HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center">
                                                 <Run Text="{Binding AvgTemperature}"/>
@@ -40,15 +41,15 @@
                                         </StackPanel>
                                     </Grid>
                                     <Grid Margin="0,12,0,0">
-                                        <Border Background="LightGray" Height="120" Width="300"/>
-                                        <StackPanel>
+                                        <Border Background="LightGray" Height="120" Width="300" Opacity="0.3"/>
+                                        <StackPanel HorizontalAlignment="Center" 
+                                                    VerticalAlignment="Center">
                                             <TextBlock Text="Average Humidity" 
-                                                       FontSize="24" 
-                                                       HorizontalAlignment="Center" 
-                                                       VerticalAlignment="Center"/>
+                                                       FontSize="24"
+                                                       FontFamily="Segoe UI Semibold"
+                                                       />
                                             <TextBlock  
                                                        FontSize="24" 
-                                                       Foreground="LimeGreen" 
                                                        HorizontalAlignment="Center" 
                                                        VerticalAlignment="Center">
                                                 <Run Text="{Binding AvgHumidity}"/>
@@ -57,15 +58,15 @@
                                         </StackPanel>
                                     </Grid>
                                     <Grid Margin="0,12,0,0">
-                                        <Border Background="LightGray" Height="120" Width="300"/>
-                                        <StackPanel>
+                                        <Border Background="LightGray" Height="120" Width="300" Opacity="0.3"/>
+                                        <StackPanel HorizontalAlignment="Center" 
+                                                    VerticalAlignment="Center">
                                             <TextBlock Text="Average Pressure" 
-                                                       FontSize="24" 
-                                                       HorizontalAlignment="Center" 
-                                                       VerticalAlignment="Center"/>
+                                                       FontSize="24"
+                                                       FontFamily="Segoe UI Semibold"
+                                                       />
                                             <TextBlock 
                                                        FontSize="24" 
-                                                       Foreground="LimeGreen" 
                                                        HorizontalAlignment="Center" 
                                                        VerticalAlignment="Center">
                                                 <Run Text="{Binding AvgPressure}"/>
@@ -86,7 +87,7 @@
                 </Grid>
             </FlipViewItem>
             <FlipViewItem>
-                <Grid Margin="24">
+                <Grid Margin="24" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
@@ -99,7 +100,7 @@
                                 <ColumnDefinition Width="75"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Starting from:" Grid.Column="0" VerticalAlignment="Center"/>
-                            <CalendarDatePicker x:Name="DpStarting" Grid.Column="1"/>
+                            <CalendarDatePicker x:Name="DpStarting" Grid.Column="1" DateFormat="{}{day.integer}/{month.integer}/{year.full}"/>
                             <Button x:Name="TglStartDate" Grid.Column="2" Content="Empty" Click="TglStartDate_Click"/>
 
                         </Grid>
@@ -110,7 +111,7 @@
                                 <ColumnDefinition Width="75"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Until:" Grid.Column="0" VerticalAlignment="Center"/>
-                            <CalendarDatePicker x:Name="DpUntil" Grid.Column="1"/>
+                            <CalendarDatePicker x:Name="DpUntil" Grid.Column="1" DateFormat="{}{day.integer}/{month.integer}/{year.full}"/>
                             <Button x:Name="TglEndDate" Grid.Column="2" Content="Empty" Click="TglEndDate_Click"/>
                         </Grid>
                         <Grid Margin="0,10,0,0">
@@ -131,7 +132,7 @@
                             <Slider x:Name="SliderTempMax" Minimum="-30" Maximum="40" StepFrequency="1" Grid.Column="1"/>
                         </Grid>
                         <Grid Margin="0,10,0,0">
-                            <Button x:Name="BtnSearch" Click="BtnSearch_Click">Search</Button>
+                            <Button x:Name="BtnSearch" Click="BtnSearch_Click" HorizontalAlignment="Center" Width="125">Search</Button>
                         </Grid>
                     </StackPanel>
                     <Grid Margin="0,10,0,0" Grid.Row="1">
@@ -139,21 +140,21 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <TextBlock>
+                                        <TextBlock Foreground="White">
                                             <Run Text="Date:"/>
-                                            <Run Text="{Binding Date}" FontWeight="SemiBold"/>
+                                            <Run Text="{Binding Date}"  FontWeight="SemiBold"/>
                                         </TextBlock>
-                                        <TextBlock>
+                                        <TextBlock Foreground="White">
                                             <Run Text="Temperature:"/>
                                             <Run Text="{Binding Temperature}"/>
                                             <Run Text="°C"/>
                                         </TextBlock>
-                                        <TextBlock>
+                                        <TextBlock Foreground="White">
                                             <Run Text="Humidity:"/>
                                             <Run Text="{Binding Humidity}"/>
                                             <Run Text="%"/>
                                         </TextBlock>
-                                        <TextBlock>
+                                        <TextBlock Foreground="White">
                                             <Run Text="Air pressure:"/>
                                             <Run Text="{Binding Pressure}"/>
                                             <Run Text="hPa"/>

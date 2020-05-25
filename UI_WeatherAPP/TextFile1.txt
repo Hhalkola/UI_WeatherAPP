@@ -1,0 +1,1 @@
+﻿Server=tcp:iotweatherdb.database.windows.net,1433;Initial Catalog=WeatherDB;Persist Security Info=False;User ID=k1901146;Password=Rc86ezm5;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30
