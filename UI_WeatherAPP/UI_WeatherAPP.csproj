@@ -133,7 +133,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="img\Beautiful-HD-Sky-Images.jpg" />
     <Content Include="img\forest_mountains_sunset_cool_weather_minimalism.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -143,7 +142,6 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
