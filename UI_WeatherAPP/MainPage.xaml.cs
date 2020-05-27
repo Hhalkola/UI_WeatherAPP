@@ -24,12 +24,12 @@ namespace UI_WeatherAPP
         {
             if (DpStarting.Date > DpUntil.Date)
             {
-                MessageDialog ms = new MessageDialog("Starting date can't be bigger than ending date");
+                MessageDialog ms = new MessageDialog("Starting date can't be later than ending date");
                 _ = ms.ShowAsync();
             }
             if (SliderTempMin.Value > SliderTempMax.Value)
             {
-                MessageDialog ms = new MessageDialog("Minimum temperature can't be bigger than maximum value");
+                MessageDialog ms = new MessageDialog("Minimum temperature can't be higher than maximum temperature");
                 _ = ms.ShowAsync();
             }
             RefreshGrid();
@@ -37,7 +37,7 @@ namespace UI_WeatherAPP
 
         private void GetTop5() //Call this on startup to setup search window to show 5 newest 
         {
-            string sql = "select top 10 id,temperature,date,humidity,pressure from weather order by id desc";
+            string sql = "select id,temperature,datevalue,humidity,pressure from weather order by id desc  limit 10";
             DataTable dt = new DataTable();
 
             Sql.FillDT(dt, sql);
@@ -50,7 +50,7 @@ namespace UI_WeatherAPP
                     Temperature = (decimal)row["temperature"],
                     Humidity = (decimal)row["humidity"],
                     Pressure = (decimal)row["pressure"],
-                    Date = (DateTime)row["date"]
+                    Date = (DateTime)row["datevalue"]
                 };
                 obj.Add(col);
             }
@@ -83,7 +83,7 @@ namespace UI_WeatherAPP
                     Temperature = (decimal)row["temperature"],
                     Humidity = (decimal)row["humidity"],
                     Pressure = (decimal)row["pressure"],
-                    Date = (DateTime)row["date"]
+                    Date = (DateTime)row["datevalue"]
                 };
                 obj.Add(col);
             }
@@ -121,12 +121,17 @@ namespace UI_WeatherAPP
             avghum = avghum / dt.Rows.Count;
             avgpres = avgpres / dt.Rows.Count;
 
+            decimal t = Math.Round(avgtemp, 2);
+            decimal h = Math.Round(avghum, 2);
+            decimal p = Math.Round(avgpres, 2);
+
+
             ObservableCollection<Averageweather> obj = new ObservableCollection<Averageweather>();
             var col = new Averageweather()
             {
-                AvgTemperature = avgtemp,
-                AvgHumidity = avghum,
-                AvgPressure = avgpres,
+                AvgTemperature = t,
+                AvgHumidity = h,
+                AvgPressure = p,
             };
             obj.Add(col);
 
