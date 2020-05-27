@@ -164,22 +164,7 @@ namespace UI_WeatherAPP
             }
             catch (Exception ex)
             {
-
                 MessageDialog ms = new MessageDialog(ex.Message);
-                _ = ms.ShowAsync();
-            }
-        }
-
-        private void BtnSearchGrd_Click(object sender, RoutedEventArgs e)
-        {
-            if (DpStarting.Date > DpUntil.Date)
-            {
-                MessageDialog ms = new MessageDialog("Starting date can't be later than ending date");
-                _ = ms.ShowAsync();
-            }
-            if (SliderTempMin.Value > SliderTempMax.Value)
-            {
-                MessageDialog ms = new MessageDialog("Minimum temperature can't be higher than maximum temperature");
                 _ = ms.ShowAsync();
             }
         }
