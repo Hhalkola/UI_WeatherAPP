@@ -145,7 +145,7 @@ namespace UI_WeatherAPP
             try
             {
                 DataTable dt = new DataTable();
-                dt = Sql.FillDT(dt, "SELECT * FROM WEATHER");
+                dt = Sql.FillDT(dt, "SELECT * FROM WEATHER order by datevalue desc");
 
                 ObservableCollection<Weather> obj = new ObservableCollection<Weather>();
                 foreach (DataRow row in dt.Rows)
@@ -166,20 +166,6 @@ namespace UI_WeatherAPP
             {
 
                 MessageDialog ms = new MessageDialog(ex.Message);
-                _ = ms.ShowAsync();
-            }
-        }
-
-        private void BtnSearchGrd_Click(object sender, RoutedEventArgs e)
-        {
-            if (DpStarting.Date > DpUntil.Date)
-            {
-                MessageDialog ms = new MessageDialog("Starting date can't be later than ending date");
-                _ = ms.ShowAsync();
-            }
-            if (SliderTempMin.Value > SliderTempMax.Value)
-            {
-                MessageDialog ms = new MessageDialog("Minimum temperature can't be higher than maximum temperature");
                 _ = ms.ShowAsync();
             }
         }
