@@ -17,6 +17,7 @@ namespace UI_WeatherAPP
             this.InitializeComponent();
             GetTop5();
             GetDataForAverages();
+            GetAllData();
 
         }
 
@@ -87,6 +88,7 @@ namespace UI_WeatherAPP
                 };
                 obj.Add(col);
             }
+            GrdWeather.Header = $"Found " + dt.Rows.Count.ToString() + " items";
             GrdWeather.ItemsSource = obj;
         }
 
@@ -136,6 +138,50 @@ namespace UI_WeatherAPP
             obj.Add(col);
 
             grdview.ItemsSource = obj;
+        }
+
+        private void GetAllData()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                dt = Sql.FillDT(dt, "SELECT * FROM WEATHER");
+
+                ObservableCollection<Weather> obj = new ObservableCollection<Weather>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    var col = new Weather()
+                    {
+                        Temperature = (decimal)row["temperature"],
+                        Humidity = (decimal)row["humidity"],
+                        Pressure = (decimal)row["pressure"],
+                        Date = (DateTime)row["datevalue"]
+                    };
+                    obj.Add(col);
+                }
+                GrdSearchAll.ItemsSource = obj;
+                TbItemsCount.Text = $"There are " + dt.Rows.Count.ToString()+ " items in database" ;
+            }
+            catch (Exception ex)
+            {
+
+                MessageDialog ms = new MessageDialog(ex.Message);
+                _ = ms.ShowAsync();
+            }
+        }
+
+        private void BtnSearchGrd_Click(object sender, RoutedEventArgs e)
+        {
+            if (DpStarting.Date > DpUntil.Date)
+            {
+                MessageDialog ms = new MessageDialog("Starting date can't be later than ending date");
+                _ = ms.ShowAsync();
+            }
+            if (SliderTempMin.Value > SliderTempMax.Value)
+            {
+                MessageDialog ms = new MessageDialog("Minimum temperature can't be higher than maximum temperature");
+                _ = ms.ShowAsync();
+            }
         }
     }
 }
