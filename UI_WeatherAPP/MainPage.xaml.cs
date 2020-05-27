@@ -145,7 +145,7 @@ namespace UI_WeatherAPP
             try
             {
                 DataTable dt = new DataTable();
-                dt = Sql.FillDT(dt, "SELECT * FROM WEATHER");
+                dt = Sql.FillDT(dt, "SELECT * FROM WEATHER order by datevalue desc");
 
                 ObservableCollection<Weather> obj = new ObservableCollection<Weather>();
                 foreach (DataRow row in dt.Rows)
