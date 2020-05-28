@@ -194,15 +194,15 @@
                                 Binding="{Binding Date,Converter={StaticResource DateToStringFormatConverter}}">
                             </controls1:DataGridTextColumn>
                             <controls1:DataGridTextColumn
-                                Header="Temperature"
+                                Header="Temperature (°C)"
                                 Binding="{Binding Temperature}">
                             </controls1:DataGridTextColumn>
                             <controls1:DataGridTextColumn
-                                Header="Pressure"
+                                Header="Pressure (hPa)"
                                 Binding="{Binding Pressure}">
                             </controls1:DataGridTextColumn>
                             <controls1:DataGridTextColumn
-                                Header="Humidity"
+                                Header="Humidity (%)"
                                 Binding="{Binding Humidity}">
                             </controls1:DataGridTextColumn>
                         </controls1:DataGrid.Columns>

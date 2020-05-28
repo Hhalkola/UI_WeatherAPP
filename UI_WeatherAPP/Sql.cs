@@ -10,7 +10,7 @@ namespace UI_WeatherAPP
 {
     class Sql
     {
-        static private string connstring = ReadTxt(); 
+        static private string connstring = ReadTxt();
 
         private static MySqlConnection ConnToDB()
         {
@@ -22,7 +22,6 @@ namespace UI_WeatherAPP
             }
             catch (Exception ex)
             {
-
                 MessageDialog ms = new MessageDialog(ex.Message);
                 _ = ms.ShowAsync();
             }
@@ -95,7 +94,7 @@ namespace UI_WeatherAPP
             {
                 sql += string.Format(" WHERE temperature <= '{0}'", tempmax);
             }
-            sql += "ORDER BY datevalue DESC";
+            sql += "ORDER BY id DESC";
             return sql;
         }
 

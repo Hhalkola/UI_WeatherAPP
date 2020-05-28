@@ -140,12 +140,12 @@ namespace UI_WeatherAPP
             grdview.ItemsSource = obj;
         }
 
-        private void GetAllData()
+        private void GetAllData() //Fill datagrid with this
         {
             try
             {
                 DataTable dt = new DataTable();
-                dt = Sql.FillDT(dt, "SELECT * FROM WEATHER order by datevalue desc");
+                dt = Sql.FillDT(dt, "SELECT * FROM WEATHER order by id desc");
 
                 ObservableCollection<Weather> obj = new ObservableCollection<Weather>();
                 foreach (DataRow row in dt.Rows)
